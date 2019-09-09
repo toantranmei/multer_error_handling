@@ -4,6 +4,9 @@ const UploadFile = require("../middleware/UploadImage");
 
 const router = express.Router();
 
-router.post("/image", UploadFile.array("./uploads", "files", 25), ImageController.save );
+router.post("/image", (req, res, next) => {
+  req.uid = "122313";
+  next();
+}, UploadFile.array("./uploads", "files", 25, null, "uid"), ImageController.save );
 
 module.exports = router;
